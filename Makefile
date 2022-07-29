@@ -6,3 +6,5 @@ migrate_up:
 
 migrate_down:
 	migrate -database $(POSTGRESQL_URL) -path db/migrations down
+sqlc:
+	sqlc generate
