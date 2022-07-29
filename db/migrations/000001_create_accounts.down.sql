@@ -1,2 +1,2 @@
 drop table if exists "transfer";
-drop table if exists "Accounts"
+drop table if exists "accounts"
