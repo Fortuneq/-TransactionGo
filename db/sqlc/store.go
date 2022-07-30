@@ -74,6 +74,7 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 			ToAccountID:   arg.ToAccountID,
 			Amount:        arg.Amount,
 		})
+
 		if err != nil {
 			return err
 		}
@@ -94,6 +95,17 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 			return err
 		}
 
+		account,err := store.GetAccount(ctx,arg.FromAccountID)
+		if err != nil{
+			return err
+		}
+
+		if account.Balance - arg.Amount < 0{
+			
+			result.FromAccount, result.ToAccount, err = MoneyValidator(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
+			return err
+		}
+		
 		if arg.FromAccountID < arg.ToAccountID {
 			result.FromAccount, result.ToAccount, err = addMoney(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
 		} else {
@@ -128,4 +140,14 @@ func addMoney(
 	})
 	return
 }
+
+func MoneyValidator(	ctx context.Context,
+	q *Queries,
+	accountID1 int64,
+	amount1 int64,
+	accountID2 int64,
+	amount2 int64,)(account1 Account, account2 Account, err error){
+		err = fmt.Errorf("%s","Your moneybag is not big enough go to work")
+		return 
+	}
 

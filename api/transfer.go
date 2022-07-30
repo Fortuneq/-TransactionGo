@@ -31,6 +31,10 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		return
 	}
 
+
+	if !server.validMoneyAccount(ctx, req.ToAccountID) {
+		return
+	}
 	arg := db.TransferTxParams{
 		FromAccountID: req.FromAccountID,
 		ToAccountID:   req.ToAccountID,
@@ -44,6 +48,22 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, result)
+}
+
+func(server *Server) validMoneyAccount(ctx *gin.Context, accountID int64) bool{
+	account, err := server.store.GetAccount(ctx, accountID)
+	if err != nil{
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			return false
+	}
+}
+if account.Balance <= 0 {
+	err := fmt.Errorf("account [%d] balance is not sufficient to transfer : %d ", account.ID, account.Balance)
+	ctx.JSON(http.StatusBadRequest, errorResponse(err))
+	return false
+}
+return true
 }
 
 func (server *Server) validAccount(ctx *gin.Context, accountID int64, currency string) bool {
