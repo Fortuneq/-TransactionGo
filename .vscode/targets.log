@@ -7,9 +7,8 @@ make: *** No rule to make target 'all'.  Stop.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sat Jul 30 03:53:16 2022
+# Make data base, printed on Sat Jul 30 14:46:04 2022
 
 # Variables
 
@@ -64,7 +63,7 @@ VSCODE_CODE_CACHE_PATH = /home/vlad/.config/Code/CachedData/3b889b090b5ad5793f52
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.PTJ9P1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.7GVZP1
 # default
 .LOADED := 
 # default
@@ -80,7 +79,6 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
- 
 MFLAGS = -pqrR
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
@@ -101,7 +99,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 96244
+VSCODE_PID = 5235
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
@@ -109,7 +107,7 @@ XDG_SESSION_TYPE = wayland
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/vlad-Lenovo-ideapad-330-15ARR:@/tmp/.ICE-unix/2489,unix/vlad-Lenovo-ideapad-330-15ARR:/tmp/.ICE-unix/2489
+SESSION_MANAGER = local/vlad-Lenovo-ideapad-330-15ARR:@/tmp/.ICE-unix/2263,unix/vlad-Lenovo-ideapad-330-15ARR:/tmp/.ICE-unix/2263
 # automatic
 *F = $(notdir $*)
 # environment
@@ -159,7 +157,7 @@ LC_TIME = ru_RU.UTF-8
 # environment
 SNAP = /snap/code/102
 # environment
-INVOCATION_ID = 76a506ca622c456bb00c6eb8cbd2d79a
+INVOCATION_ID = 28502861d5eb4b4d9f2811d7fa7267c8
 # environment
 SNAP_REVISION = 102
 # environment
@@ -185,7 +183,6 @@ LS_COLORS =
 # environment
 DESKTOP_SESSION = ubuntu
 # environment
- 
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # 'override' directive
 GNUMAKEFLAGS := 
@@ -198,7 +195,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := migrate_up
 # environment
-SYSTEMD_EXEC_PID = 2516
+SYSTEMD_EXEC_PID = 2287
 # environment
 DISPLAY = :0
 # environment
@@ -214,11 +211,11 @@ SNAP_DATA = /var/snap/code/102
 # environment
 SNAP_CONTEXT = w2Wb-VM8-eAhm9uV8JeVafh_gSHdN_5vCQNQdHkhTUdVqtaQ4qVc
 # environment
-MANAGERPID = 2314
+MANAGERPID = 2088
 # environment
 LC_MEASUREMENT = ru_RU.UTF-8
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 96196
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5186
 # environment
 _ = /snap/code/102/usr/share/code/code
 # environment
@@ -228,7 +225,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/vlad/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-JOURNAL_STREAM = 8:38931
+JOURNAL_STREAM = 8:36509
 # environment
 GOMODCACHE = /home/vlad/go/pkg/mod
 # environment
@@ -301,7 +298,8 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-29 19:04:58.896798858
+ 
+#  Last modified 2022-07-30 04:04:04.929589643
 #  File has been updated.
 #  Successfully updated.
 
@@ -325,11 +323,18 @@ migrate_up:
 #  recipe to execute (from 'Makefile', line 5):
 	migrate -database $(POSTGRESQL_URL) -path db/migrations up
 
-sqlc:
+test:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 10):
+	go test -v -cover ./...
+
+sqlc:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 12):
 	sqlc generate
 
 migrate_down:
@@ -340,19 +345,19 @@ migrate_down:
 	migrate -database $(POSTGRESQL_URL) -path db/migrations down
 
 # files hash-table stats:
-# Load=7/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 21 / storage = 171 B / avg = 8 B
-# current buf: size = 8162 B / used = 171 B / count = 21 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 176 B / avg = 8 B
+# current buf: size = 8162 B / used = 176 B / count = 22 / avg = 8 B
 
-# strcache performance: lookups = 28 / hit rate = 25%
+# strcache performance: lookups = 30 / hit rate = 26%
 # hash-table stats:
-# Load=21/8192=0%, Rehash=0, Collisions=0/28=0%
-# Finished Make data base on Sat Jul 30 03:53:16 2022
+# Load=22/8192=0%, Rehash=0, Collisions=0/30=0%
+# Finished Make data base on Sat Jul 30 14:46:04 2022
 
  
