@@ -9,7 +9,7 @@ import (
 )
 
 type Accounts struct {
-	ID       int32   `json:"id"`
+	ID       int64   `json:"id"`
 	UserName string  `json:"user_name"`
 	Balance  float32 `json:"balance"`
 }

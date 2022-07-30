@@ -15,26 +15,13 @@ const (
 
 
 
+var testQueries *Queries
 
-func TestMain(m *testing.M){
-
-
-	var TestQueries *Queries
-
-	
+func TestMain(m *testing.M){	
 	conn, err := sql.Open(dbDriver,dbSource)
 	if err != nil {
 		log.Fatal("cannot access database",err)
 	}
 	testQueries = New(conn)
-	os.Exit(m.Run())
-}
-
-func TestMain(m *testing.M){
-	conn, err := sql.Open(dbDriver,dbSource)
-	if err != nil {
-		log.Fatal("cannot access database",err)
-	}
-	TestQueries(conn)
 	os.Exit(m.Run())
 }

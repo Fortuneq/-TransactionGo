@@ -13,11 +13,14 @@ func TestCreateAccount(t *testing.T) {
 		UserName: util.RandomUser(),
 		Balance:  util.RandomMoney(),
 	}
-	account, err := TestQueries.CreateAccount(context.Background(), arg)
+
+
+	account, err := testQueries.CreateAccount(context.Background(), arg)
+	
 	require.NoError(t, err)
 	require.NotEmpty(t, account)
-	require.Equal(t, arg.UserName, account.user_name)
-	require.Equal(t, arg.Balance, account.balance)
+	require.Equal(t, arg.UserName, account.UserName)
+	require.Equal(t, arg.Balance, account.Balance)
 
 	require.NotZero(t, account.ID)
 }
