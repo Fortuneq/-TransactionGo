@@ -10,8 +10,8 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
-	mockdb "github.com/techschool/simplebank/db/mock"
-	db "github.com/techschool/simplebank/db/sqlc"
+	mockdb "transactions/db/mock"
+	db "transactions/db/sqlc"
 	"transactions/util"
 )
 
