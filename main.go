@@ -1,20 +1,31 @@
 package main
 
 import (
-	"fmt"
-	"io"
-	"net/http"
+	"database/sql"
+	"log"
+
+	_ "github.com/lib/pq"
+	"transactions/api"
+	db "transactions/db/sqlc"
+	"transactions/util"
 )
 
-type stringHandler struct{
-	message string
-}
-func (sh stringHandler) ServeHTTP(writer http.ResponseWriter,request *http.Request){
-	io.WriteString(writer,sh.message)
-}
 func main() {
-	err := http.ListenAndServe(":1234",stringHandler{message:"Hello World"})
-	if err != nil{
-		fmt.Println(err)
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
+
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
+	if err != nil {
+		log.Fatal("cannot connect to db:", err)
+	}
+
+	store := db.NewStore(conn)
+	server := api.NewServer(store)
+
+	err = server.Start(config.ServerAddress)
+	if err != nil {
+		log.Fatal("cannot start server:", err)
 	}
 }
