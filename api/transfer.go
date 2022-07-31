@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	db "transactions/db/sqlc"
+	"transactions/util"
+	"github.com/Straycats/redismq"
+	"github.com/gin-gonic/gin"
 )
 
 type transferRequest struct {
@@ -17,6 +19,16 @@ type transferRequest struct {
 }
 
 func (server *Server) createTransfer(ctx *gin.Context) {
+	Consname := util.RandomOwner()
+	testQueue := redismq.CreateQueue("localhost", "6379", "", 0, "clicks")
+	testQueue.Put("1")
+	consumer, err := testQueue.AddConsumer(Consname)
+	if err != nil {
+		panic(err)
+	}
+
+	
+	
 	var req transferRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -47,6 +59,23 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		return
 	}
 
+		p, err := consumer.Get()
+		if err != nil {
+			fmt.Println(err)
+		}
+		if (p.Payload == "1"){
+			ctx.JSON(http.StatusOK, result)
+		}
+		err = p.Ack()
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println("Aded Queue")
+		consumer.Quit()
+		consumer, err = testQueue.AddConsumer(Consname)
+		if err != nil {
+			panic(err)
+		}
 	ctx.JSON(http.StatusOK, result)
 }
 

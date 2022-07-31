@@ -4,10 +4,11 @@ import (
 	"database/sql"
 	"log"
 
-	_ "github.com/lib/pq"
 	"transactions/api"
 	db "transactions/db/sqlc"
 	"transactions/util"
+
+	_ "github.com/lib/pq"
 )
 
 func main() {
